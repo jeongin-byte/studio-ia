@@ -1,319 +1,122 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#101010" />
-  <meta name="description" content="STUDIO IA — criatividade humana, potencializada por inteligência artificial. Estratégia, conteúdo e experiências digitais para marcas." />
-  <title>STUDIO IA — Ideias que viram impacto</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg: #101010; --panel: #171717; --panel2: #202020; --text: #f5f3ee;
-      --muted: #aaa8a1; --lime: #d8ff63; --line: rgba(245,243,238,.14);
-      --radius: 24px; --max: 1180px;
-    }
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body { margin: 0; background: var(--bg); color: var(--text); font-family: "DM Sans", sans-serif; }
-    body::before { content:""; position:fixed; inset:0; pointer-events:none; opacity:.15; z-index:-1; background-image: radial-gradient(rgba(255,255,255,.18) .6px, transparent .6px); background-size: 5px 5px; }
-    a { color: inherit; text-decoration: none; }
-    button, input, textarea, select { font: inherit; }
-    button, a { -webkit-tap-highlight-color: transparent; }
-    .wrap { width: min(var(--max), calc(100% - 44px)); margin-inline: auto; }
-    .topbar { position: sticky; top: 0; z-index: 20; backdrop-filter: blur(18px); background: rgba(16,16,16,.78); border-bottom: 1px solid rgba(255,255,255,.08); }
-    .nav { min-height: 78px; display:flex; align-items:center; justify-content:space-between; gap:24px; }
-    .brand { display:flex; align-items:center; gap:11px; font:700 1.15rem "Space Grotesk", sans-serif; letter-spacing:-.06em; }
-    .brand-mark { width:34px; height:34px; border-radius:11px; background:var(--lime); color:#111; display:grid; place-items:center; font-size:1rem; letter-spacing:-.08em; transform:rotate(-8deg); }
-    .brand span:last-child { letter-spacing:.03em; }
-    .nav-links { display:flex; align-items:center; gap:28px; color:#c8c6c0; font-size:.9rem; }
-    .nav-links a:hover { color:var(--lime); }
-    .nav-cta, .btn { display:inline-flex; align-items:center; justify-content:center; gap:10px; border:0; cursor:pointer; font-weight:700; transition:transform .2s ease, background .2s ease; }
-    .nav-cta { padding:12px 17px; border-radius:999px; background:var(--lime); color:#101010; font-size:.88rem; }
-    .nav-cta:hover, .btn:hover { transform:translateY(-2px); }
-    .menu-toggle { display:none; border:1px solid var(--line); background:transparent; color:var(--text); border-radius:12px; width:44px; height:44px; font-size:1.25rem; }
-    .hero { padding:90px 0 72px; overflow:hidden; }
-    .eyebrow { display:inline-flex; align-items:center; gap:9px; border:1px solid var(--line); padding:8px 12px; border-radius:999px; color:#d0cec7; font-size:.78rem; letter-spacing:.04em; text-transform:uppercase; }
-    .dot { width:7px; height:7px; background:var(--lime); border-radius:50%; box-shadow:0 0 14px var(--lime); }
-    .hero-grid { display:grid; grid-template-columns:1.13fr .87fr; align-items:center; gap:54px; margin-top:28px; }
-    h1,h2,h3,p { margin-top:0; }
-    h1 { font:600 clamp(3.3rem, 7.3vw, 6.7rem)/.94 "Space Grotesk", sans-serif; letter-spacing:-.085em; margin-bottom:26px; max-width:760px; }
-    h1 .accent { color:var(--lime); }
-    .hero-copy { color:var(--muted); max-width:540px; font-size:1.08rem; line-height:1.75; }
-    .hero-actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:30px; }
-    .btn { padding:15px 20px; border-radius:999px; font-size:.92rem; }
-    .btn-primary { background:var(--lime); color:#101010; }
-    .btn-secondary { background:transparent; border:1px solid var(--line); color:var(--text); }
-    .arrow { font-size:1.15rem; }
-    .hero-art { min-height:435px; position:relative; display:grid; place-items:center; }
-    .orb { width:min(370px, 82vw); aspect-ratio:1; border-radius:50%; position:relative; background:radial-gradient(circle at 33% 25%, #f4ffbd 0%, #d8ff63 15%, #8ea832 37%, #2b3516 60%, #111 72%); box-shadow:inset -25px -28px 60px rgba(0,0,0,.5), 0 0 90px rgba(216,255,99,.1); animation:float 7s ease-in-out infinite; }
-    .orb::before { content:""; position:absolute; inset:12%; border:1px solid rgba(255,255,255,.32); border-radius:50%; transform:rotate(-35deg) scaleX(.56); }
-    .orb::after { content:""; position:absolute; width:150%; height:1px; left:-25%; top:50%; background:linear-gradient(90deg, transparent, rgba(216,255,99,.8), transparent); transform:rotate(-32deg); }
-    .orbit { position:absolute; width:430px; height:190px; border:1px solid rgba(216,255,99,.4); border-radius:50%; transform:rotate(-32deg); }
-    .orbit.two { width:460px; height:260px; transform:rotate(55deg); border-color:rgba(255,255,255,.15); }
-    .float-tag { position:absolute; border:1px solid var(--line); background:rgba(23,23,23,.85); backdrop-filter:blur(12px); padding:12px 15px; border-radius:14px; font-size:.82rem; box-shadow:0 15px 35px rgba(0,0,0,.25); }
-    .float-tag strong { color:var(--lime); font-weight:600; }
-    .tag-one { top:12%; right:0; } .tag-two { bottom:14%; left:0; }
-    .stats { border-block:1px solid var(--line); display:grid; grid-template-columns:repeat(3,1fr); padding:27px 0; gap:18px; }
-    .stat { display:flex; align-items:center; justify-content:center; gap:12px; text-align:left; }
-    .stat strong { font:600 1.7rem "Space Grotesk",sans-serif; letter-spacing:-.06em; color:var(--lime); }
-    .stat span { color:var(--muted); font-size:.83rem; line-height:1.35; max-width:120px; }
-    section { padding:100px 0; }
-    .section-head { display:flex; align-items:end; justify-content:space-between; gap:28px; margin-bottom:38px; }
-    .kicker { color:var(--lime); text-transform:uppercase; letter-spacing:.12em; font-size:.76rem; font-weight:700; margin-bottom:15px; }
-    h2 { font:600 clamp(2.4rem, 5vw, 4.2rem)/1.02 "Space Grotesk",sans-serif; letter-spacing:-.075em; margin-bottom:0; max-width:700px; }
-    .section-desc { max-width:360px; color:var(--muted); line-height:1.7; margin-bottom:2px; }
-    .services { display:grid; grid-template-columns:repeat(3,1fr); gap:15px; }
-    .service { background:var(--panel); border:1px solid var(--line); border-radius:var(--radius); padding:28px; min-height:280px; display:flex; flex-direction:column; transition:transform .25s,border-color .25s; }
-    .service:hover { transform:translateY(-5px); border-color:rgba(216,255,99,.55); }
-    .service-icon { display:grid; place-items:center; width:47px; height:47px; border-radius:15px; background:rgba(216,255,99,.1); color:var(--lime); font-size:1.35rem; margin-bottom:32px; }
-    .service h3 { font:600 1.35rem "Space Grotesk",sans-serif; letter-spacing:-.04em; margin-bottom:12px; }
-    .service p { color:var(--muted); line-height:1.65; font-size:.94rem; margin-bottom:25px; }
-    .service .learn { color:var(--lime); margin-top:auto; font-size:.88rem; font-weight:700; }
-    .process { background:#151515; border-block:1px solid var(--line); }
-    .steps { display:grid; grid-template-columns:repeat(4,1fr); gap:0; margin-top:44px; }
-    .step { padding:22px 24px 15px 0; border-top:1px solid var(--line); position:relative; }
-    .step:not(:last-child) { margin-right:24px; }
-    .step-no { color:var(--lime); font:600 .9rem "Space Grotesk",sans-serif; margin-bottom:25px; }
-    .step h3 { font:600 1.15rem "Space Grotesk",sans-serif; margin-bottom:10px; }
-    .step p { color:var(--muted); font-size:.9rem; line-height:1.65; margin:0; }
-    .manifesto { display:grid; grid-template-columns:.75fr 1.25fr; gap:70px; align-items:start; }
-    .manifesto-mark { font:700 clamp(4rem,10vw,9rem)/.8 "Space Grotesk",sans-serif; letter-spacing:-.12em; color:var(--lime); opacity:.95; }
-    .manifesto-copy h2 { margin-bottom:24px; }
-    .manifesto-copy p { color:var(--muted); line-height:1.8; max-width:650px; font-size:1.02rem; }
-    .manifesto-pills { display:flex; flex-wrap:wrap; gap:9px; margin-top:25px; }
-    .pill { border:1px solid var(--line); color:#d2d0ca; border-radius:999px; padding:9px 13px; font-size:.8rem; }
-    .contact-card { border-radius:32px; background:var(--lime); color:#101010; padding:clamp(28px,6vw,66px); display:grid; grid-template-columns:1fr .75fr; gap:50px; align-items:center; }
-    .contact-card .kicker { color:#3b4c13; }
-    .contact-card h2 { max-width:600px; }
-    .contact-card p { color:#39451b; line-height:1.7; margin:20px 0 0; max-width:500px; }
-    .contact-form { display:grid; gap:12px; }
-    .contact-form input,.contact-form textarea,.contact-form select { width:100%; padding:14px 15px; background:rgba(255,255,255,.55); border:1px solid rgba(0,0,0,.16); border-radius:13px; color:#101010; outline:none; }
-    .contact-form input:focus,.contact-form textarea:focus,.contact-form select:focus { border-color:#101010; }
-    .contact-form textarea { min-height:96px; resize:vertical; }
-    .contact-form .btn { background:#101010; color:var(--lime); width:100%; }
-    .form-note { font-size:.75rem; color:#46551e; line-height:1.4; text-align:center; margin:0; }
-    footer { padding:30px 0; }
-    .footer-inner { display:flex; align-items:center; justify-content:space-between; gap:20px; color:var(--muted); font-size:.82rem; }
-    .footer-links { display:flex; gap:18px; }
-    .footer-links a:hover { color:var(--lime); }
-    .reveal { opacity:0; transform:translateY(18px); transition:opacity .65s ease, transform .65s ease; }
-    .reveal.visible { opacity:1; transform:translateY(0); }
-    @keyframes float { 0%,100%{transform:translateY(0) rotate(-5deg)} 50%{transform:translateY(-13px) rotate(1deg)} }
-    @media (max-width: 900px) {
-      .hero-grid { grid-template-columns:1fr; gap:20px; }
-      .hero-art { min-height:360px; }
-      .orb { width:290px; } .orbit { width:350px; height:150px; } .orbit.two { width:370px; height:220px; }
-      .tag-one { right:8%; } .tag-two { left:8%; }
-      .services { grid-template-columns:repeat(2,1fr); }
-      .service:last-child { grid-column:span 2; min-height:230px; }
-      .contact-card { grid-template-columns:1fr; gap:28px; }
-      .manifesto { gap:35px; }
-    }
-    @media (max-width: 640px) {
-      .wrap { width:min(100% - 32px, var(--max)); }
-      .nav { min-height:68px; }
-      .menu-toggle { display:block; }
-      .nav-links { display:none; position:absolute; top:68px; left:0; right:0; padding:20px 22px 24px; flex-direction:column; align-items:stretch; gap:18px; background:#141414; border-bottom:1px solid var(--line); }
-      .nav-links.open { display:flex; }
-      .nav-links a { padding:4px 0; }
-      .nav-cta { text-align:center; }
-      .hero { padding:58px 0 42px; }
-      h1 { font-size:clamp(3.15rem, 15vw, 5rem); }
-      .hero-copy { font-size:1rem; }
-      .hero-art { min-height:315px; margin-top:0; }
-      .orb { width:245px; }
-      .orbit { width:300px; height:130px; } .orbit.two { width:320px; height:190px; }
-      .float-tag { font-size:.73rem; padding:10px 12px; }
-      .tag-one { top:8%; right:0; } .tag-two { bottom:9%; left:0; }
-      .stats { grid-template-columns:1fr; gap:18px; padding:24px 0; }
-      .stat { justify-content:flex-start; }
-      section { padding:70px 0; }
-      .section-head { display:block; margin-bottom:28px; }
-      .section-desc { margin-top:18px; }
-      .services { grid-template-columns:1fr; }
-      .service,.service:last-child { grid-column:auto; min-height:240px; }
-      .steps { grid-template-columns:1fr 1fr; gap:24px 14px; }
-      .step:not(:last-child) { margin-right:0; }
-      .step { padding-right:8px; }
-      .manifesto { grid-template-columns:1fr; gap:26px; }
-      .manifesto-mark { font-size:5.5rem; }
-      .contact-card { border-radius:24px; padding:26px 20px; }
-      .footer-inner { flex-direction:column; align-items:flex-start; }
-      .footer-links { flex-wrap:wrap; }
-    }
-    @media (prefers-reduced-motion: reduce) { *,*::before,*::after { scroll-behavior:auto !important; animation:none !important; transition:none !important; } .reveal { opacity:1; transform:none; } }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#17151d">
+<meta name="description" content="STUDIO IA — criações digitais personalizadas, montagens, mesversários, posts, convites, logos e muito mais. Peça seu orçamento pelo WhatsApp.">
+<title>STUDIO IA — ideias que ganham forma</title>
+<style>
+:root{--ink:#19161f;--paper:#f6f1e8;--muted:#c9c0d0;--violet:#a78bfa;--acid:#d7fb62;--coral:#ff805e;--line:rgba(255,255,255,.14);--serif:Georgia,'Times New Roman',serif;--sans:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--ink);color:var(--paper);font-family:var(--sans);line-height:1.55}a{color:inherit;text-decoration:none}button,select{font:inherit}.wrap{width:min(1180px,calc(100% - 40px));margin:auto}.topline{height:4px;background:linear-gradient(90deg,var(--violet),var(--coral),var(--acid))}.nav{position:sticky;top:0;z-index:10;background:rgba(25,22,31,.88);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}.nav-inner{height:82px;display:flex;align-items:center;justify-content:space-between;gap:24px}.brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:.14em;font-size:.92rem}.brand img{width:62px;height:48px;object-fit:cover;object-position:center;background:var(--paper);border-radius:5px}.nav-links{display:flex;align-items:center;gap:25px;font-size:.88rem;color:#e0d9e8}.nav-links a:hover{color:var(--acid)}.nav-actions{display:flex;align-items:center;gap:12px}.lang{background:transparent;color:var(--paper);border:1px solid var(--line);border-radius:999px;padding:9px 12px}.menu-toggle{display:none;background:none;color:var(--paper);border:1px solid var(--line);border-radius:10px;padding:9px 12px}
+.hero{position:relative;overflow:hidden;padding:86px 0 92px;min-height:630px;display:flex;align-items:center}.hero:before{content:"";position:absolute;width:560px;height:560px;right:-80px;top:15px;background:radial-gradient(circle,rgba(167,139,250,.24),rgba(167,139,250,0) 68%);pointer-events:none}.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:54px;align-items:center;position:relative}.eyebrow{display:inline-flex;align-items:center;gap:10px;text-transform:uppercase;letter-spacing:.2em;font-size:.72rem;color:var(--acid);font-weight:750}.eyebrow:before{content:"";width:26px;height:1px;background:currentColor}.hero h1{font-family:var(--serif);font-size:clamp(3.5rem,7vw,6.5rem);font-weight:500;line-height:.98;letter-spacing:-.055em;margin:23px 0}.hero h1 em{font-weight:400;color:var(--violet)}.hero p{font-size:1.06rem;color:#d0c8d8;max-width:540px}.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px 20px;border-radius:999px;border:1px solid transparent;font-weight:750;font-size:.9rem;transition:transform .22s,background .22s,border-color .22s;cursor:pointer}.btn:hover{transform:translateY(-2px)}.btn-primary{background:var(--acid);color:#17151d}.btn-primary:hover{background:#e5ff91}.btn-secondary{border-color:rgba(255,255,255,.28);color:var(--paper);background:rgba(255,255,255,.02)}.btn-secondary:hover{border-color:var(--violet)}.hero-note{font-size:.78rem!important;color:#a69bad!important;margin-top:22px}.visual{position:relative;min-height:420px;display:grid;place-items:center}.orb{position:absolute;width:330px;height:330px;border-radius:50%;background:radial-gradient(circle at 30% 25%,#e4d7ff,#9a76ed 28%,#3c2b68 63%,#211b2d 75%);box-shadow:0 25px 100px rgba(167,139,250,.22);animation:float 7s ease-in-out infinite}.orbit{position:absolute;width:430px;height:155px;border:1px solid rgba(215,251,98,.72);border-radius:50%;transform:rotate(-28deg)}.orbit.two{width:450px;height:220px;border-color:rgba(255,128,94,.65);transform:rotate(48deg)}.spark{position:absolute;color:var(--acid);font-size:2rem}.spark.s1{top:54px;right:15%}.spark.s2{bottom:65px;left:12%;color:var(--coral);font-size:1.3rem}.visual-card{position:relative;z-index:2;width:230px;padding:15px;border:1px solid rgba(255,255,255,.25);border-radius:20px;background:rgba(25,22,31,.72);backdrop-filter:blur(16px);transform:rotate(7deg);box-shadow:0 25px 80px rgba(0,0,0,.28)}.visual-card img{display:block;width:100%;height:145px;object-fit:cover;object-position:center;background:var(--paper);border-radius:11px}.visual-card .mini{display:flex;justify-content:space-between;align-items:center;margin-top:13px;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:#d6cede}.mini b{color:var(--acid);font-size:.65rem}
+.section{padding:94px 0}.section-light{background:var(--paper);color:var(--ink)}.section-head{display:flex;justify-content:space-between;align-items:end;gap:35px;margin-bottom:36px}.kicker{text-transform:uppercase;letter-spacing:.2em;font-size:.7rem;font-weight:800;color:#8b71d6}.section h2{font-family:var(--serif);font-size:clamp(2.5rem,5vw,4.2rem);font-weight:500;letter-spacing:-.045em;line-height:1.03;margin:12px 0 0}.section-head p{max-width:410px;color:#a99fb0;margin:0}.section-light .section-head p{color:#655d69}.services-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:13px}.service{position:relative;min-height:235px;border:1px solid rgba(25,22,31,.12);border-radius:18px;padding:22px;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;background:#fffaf1;transition:transform .25s,box-shadow .25s}.service:hover{transform:translateY(-5px);box-shadow:0 18px 40px rgba(25,22,31,.09)}.service:nth-child(2){background:#e8e0ff}.service:nth-child(3){background:#dff0d0}.service:nth-child(4){background:#ffe1d6}.service:nth-child(5){background:#e4e9ff}.service:nth-child(6){background:#f4e7ce}.service:nth-child(7){background:#e3d7ee}.service .num{font-size:.72rem;letter-spacing:.16em;color:#665d6a}.service .symbol{position:absolute;right:18px;top:12px;font-size:3.2rem;opacity:.8;font-family:var(--serif)}.service h3{font-family:var(--serif);font-size:1.65rem;line-height:1.05;margin:30px 0 8px;font-weight:500}.service p{font-size:.85rem;color:#514957;margin:0 0 17px}.service .more{font-size:.8rem;font-weight:800;display:flex;gap:8px;align-items:center}
+.portfolio-intro{display:flex;justify-content:space-between;align-items:center;gap:24px;margin-bottom:24px}.filters{display:flex;flex-wrap:wrap;gap:8px}.filter{border:1px solid rgba(25,22,31,.18);background:transparent;border-radius:999px;padding:8px 13px;font-size:.78rem;cursor:pointer;color:var(--ink)}.filter.active,.filter:hover{background:var(--ink);color:var(--paper)}.portfolio-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.work{border-radius:18px;overflow:hidden;background:#e9e1d7;color:var(--ink);min-width:0}.art{height:265px;position:relative;overflow:hidden;display:grid;place-items:center;padding:20px}.art:after{content:"EXEMPLO CONCEITUAL";position:absolute;bottom:12px;left:13px;font-size:.58rem;letter-spacing:.15em;font-weight:850;opacity:.72}.art.baby{background:radial-gradient(circle at 70% 25%,#fff5d6 0 9%,transparent 10%),linear-gradient(135deg,#f7d6c9,#d9c5f4)}.baby .arch{width:155px;height:180px;border-radius:90px 90px 20px 20px;background:#f8eee2;border:9px solid rgba(255,255,255,.5);display:grid;place-items:center;font-size:4.2rem;box-shadow:0 15px 40px #9b6b7544}.baby .label{position:absolute;top:25px;left:25px;font-family:var(--serif);font-size:1.4rem;line-height:1.1}.baby .label b{display:block;font-size:2.8rem;color:#8a4168}.art.photo{background:linear-gradient(135deg,#b8c5bd,#e7d8c8)}.portrait{width:128px;height:170px;border-radius:65px 65px 20px 20px;background:linear-gradient(180deg,#e0a77f 0 23%,#362b35 24% 43%,#c58e70 44% 66%,#2d3840 67%);position:relative;box-shadow:0 16px 35px #29312b33}.portrait:before{content:"";position:absolute;width:70px;height:90px;border-radius:50% 50% 43% 43%;background:#9a5f48;top:-8px;left:29px;box-shadow:inset 0 15px 0 #38242b}.portrait:after{content:"";position:absolute;bottom:0;left:-30px;width:190px;height:65px;border-radius:50% 50% 0 0;background:#e8dfd2}.art.post{background:#d7f35e}.post-sheet{width:180px;height:200px;background:#26212d;color:#f8f1e7;padding:18px;transform:rotate(-5deg);box-shadow:10px 12px 0 #f9f2e7}.post-sheet small{letter-spacing:.15em}.post-sheet strong{display:block;font-family:var(--serif);font-size:2rem;line-height:.95;margin-top:24px}.post-sheet i{display:block;width:55px;height:5px;background:#ff805e;margin-top:17px}.art.logoart{background:#eee4d4}.logo-shape{font-family:var(--serif);font-size:4.3rem;letter-spacing:-.1em;color:#4b315d;position:relative}.logo-shape:after{content:"✦";font-size:1.4rem;color:#ff805e;position:absolute;right:-22px;top:-5px}.art.invite{background:linear-gradient(135deg,#f2d3a7,#f7e9d9)}.invite-card{width:155px;height:195px;background:#fff8e9;border:1px solid #bda57c;outline:5px solid #fff8e9;box-shadow:0 15px 35px #6b4b2733;text-align:center;padding:20px 12px;transform:rotate(4deg)}.invite-card span{font-size:.65rem;letter-spacing:.2em}.invite-card strong{display:block;font-family:var(--serif);font-size:2.3rem;font-weight:400;line-height:1;margin:18px 0}.invite-card small{font-size:.6rem;letter-spacing:.1em}.art.ensaios{background:linear-gradient(135deg,#d9c4f8,#f9c7a5)}.ensaios .sphere{width:145px;height:185px;border-radius:90px 90px 25px 25px;background:radial-gradient(circle at 40% 25%,#ffe0c7,#bf7f89 45%,#51415e 75%);box-shadow:0 20px 45px #5e3d5a55}.work-info{padding:17px 18px 19px;background:#fffaf1}.work-info h3{font-family:var(--serif);font-size:1.3rem;font-weight:500;margin:0 0 4px}.work-info p{font-size:.82rem;color:#655d69;margin:0}.demo-note{margin-top:18px;font-size:.8rem;color:#6b6270;max-width:800px}
+.process-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.step{border-top:1px solid var(--line);padding-top:18px}.step .stepnum{font-size:.7rem;letter-spacing:.18em;color:var(--acid)}.step h3{font-family:var(--serif);font-size:1.55rem;font-weight:500;margin:20px 0 8px}.step p{color:#bcb2c5;font-size:.88rem;margin:0}
+.custom{padding:68px;border-radius:26px;background:linear-gradient(120deg,#d7fb62,#b6a0ff 72%,#ff9c7d);color:#1b1720;display:grid;grid-template-columns:1.2fr .8fr;gap:30px;align-items:center;position:relative;overflow:hidden}.custom:after{content:"✳";position:absolute;font-size:17rem;right:-20px;bottom:-120px;opacity:.12;line-height:1}.custom h2{font-family:var(--serif);font-size:clamp(2.5rem,5vw,4.5rem);line-height:.98;letter-spacing:-.05em;font-weight:500;margin:15px 0}.custom p{max-width:520px;color:#393142}.custom .btn{background:#1b1720;color:#fff}.custom .right{position:relative;z-index:1;justify-self:end;max-width:250px;font-family:var(--serif);font-size:1.6rem;line-height:1.2}
+.faq-grid{display:grid;grid-template-columns:.75fr 1.25fr;gap:60px}.faq-list details{border-bottom:1px solid var(--line);padding:19px 0}.faq-list summary{cursor:pointer;font-weight:700;list-style:none;display:flex;justify-content:space-between;gap:20px}.faq-list summary:after{content:"+";color:var(--acid);font-size:1.2rem}.faq-list details[open] summary:after{content:"−"}.faq-list details p{color:#beb4c7;font-size:.9rem;max-width:650px}
+.final-cta{text-align:center;padding:90px 0}.final-cta h2{font-family:var(--serif);font-weight:500;font-size:clamp(2.8rem,6vw,5.3rem);line-height:.98;letter-spacing:-.05em;max-width:850px;margin:16px auto}.final-cta p{color:#c8bfce;max-width:500px;margin:20px auto}.footer{border-top:1px solid var(--line);padding:28px 0;color:#a99fb0;font-size:.78rem}.footer-inner{display:flex;justify-content:space-between;align-items:center;gap:20px}.footer strong{color:var(--paper);letter-spacing:.14em}.wa-float{position:fixed;z-index:9;bottom:20px;right:20px;background:var(--acid);color:#17151d;border-radius:999px;padding:14px 18px;font-size:.82rem;font-weight:850;box-shadow:0 10px 30px #0005;display:flex;gap:9px;align-items:center}.reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}.reveal.visible{opacity:1;transform:translateY(0)}@keyframes float{0%,100%{transform:translateY(0) rotate(-7deg)}50%{transform:translateY(-14px) rotate(-3deg)}}@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;scroll-behavior:auto!important;transition:none!important}.reveal{opacity:1;transform:none}}
+@media(max-width:900px){.nav-links{gap:13px}.hero-grid{gap:20px}.visual{transform:scale(.88)}.services-grid{grid-template-columns:repeat(2,1fr)}.portfolio-grid{grid-template-columns:repeat(2,1fr)}.custom{padding:42px;grid-template-columns:1fr}.custom .right{justify-self:start}.faq-grid{gap:28px}.section-head{align-items:start;flex-direction:column}}
+@media(max-width:650px){.wrap{width:min(100% - 28px,1180px)}.nav-inner{height:70px}.brand img{width:48px;height:40px}.menu-toggle{display:block}.nav-links{display:none;position:absolute;top:70px;left:0;right:0;background:#211d28;padding:18px 22px 22px;flex-direction:column;align-items:flex-start;border-bottom:1px solid var(--line)}.nav-links.open{display:flex}.nav-actions{gap:8px}.hero{padding:55px 0 50px;min-height:unset}.hero-grid{grid-template-columns:1fr;gap:5px}.hero h1{font-size:clamp(3.3rem,16vw,5rem)}.hero p{font-size:.98rem}.visual{min-height:320px;transform:scale(.84);margin:-10px 0 -20px}.orb{width:270px;height:270px}.orbit{width:340px;height:130px}.orbit.two{width:350px;height:170px}.section{padding:65px 0}.services-grid{gap:9px}.service{padding:16px;min-height:215px}.service h3{font-size:1.38rem}.service .symbol{font-size:2.5rem;right:13px}.portfolio-intro{align-items:flex-start;flex-direction:column}.portfolio-grid{grid-template-columns:1fr 1fr;gap:9px}.art{height:205px;padding:12px}.art:after{font-size:.47rem;left:8px;bottom:8px}.baby .arch{width:112px;height:140px;font-size:3.2rem}.baby .label{left:13px;top:14px;font-size:1rem}.baby .label b{font-size:2rem}.portrait{transform:scale(.78)}.post-sheet{transform:scale(.8) rotate(-5deg)}.logo-shape{font-size:3.2rem}.invite-card{transform:scale(.8) rotate(4deg)}.ensaios .sphere{width:110px;height:140px}.work-info{padding:12px}.work-info h3{font-size:1.08rem}.work-info p{font-size:.75rem}.process-grid{grid-template-columns:1fr 1fr;gap:28px 18px}.custom{padding:28px 23px;border-radius:20px}.custom h2{font-size:3rem}.faq-grid{grid-template-columns:1fr;gap:10px}.final-cta{padding:65px 0}.footer-inner{align-items:flex-start;flex-direction:column;gap:9px}.wa-float{right:12px;bottom:12px;padding:12px 15px}.section-head p{max-width:none}}
+</style>
 </head>
 <body>
-  <header class="topbar">
-    <div class="wrap nav">
-      <a class="brand" href="#inicio" aria-label="STUDIO IA, início"><span class="brand-mark">✳</span><span>STUDIO IA</span></a>
-      <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu" aria-expanded="false">☰</button>
-      <nav class="nav-links" id="navLinks" aria-label="Navegação principal">
-        <a href="#servicos">o que fazemos</a>
-        <a href="#processo">nosso processo</a>
-        <a href="#sobre">sobre o studio</a>
-        <a class="nav-cta" href="#contato">vamos conversar <span>↗</span></a>
-      </nav>
-    </div>
-  </header>
+<div class="topline"></div>
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="#inicio" aria-label="STUDIO IA - início"><img src="assets/logo-studio-ia.png" alt="Logo STUDIO IA"><span>STUDIO IA</span></a>
+    <nav class="nav-links" id="navLinks" aria-label="Navegação principal">
+      <a href="#servicos" data-i18n="navServices">Serviços</a><a href="#portfolio" data-i18n="navPortfolio">Galeria</a><a href="#processo" data-i18n="navProcess">Como funciona</a><a href="#faq" data-i18n="navFaq">Dúvidas</a>
+    </nav>
+    <div class="nav-actions"><select class="lang" id="language" aria-label="Idioma"><option value="pt">PT</option><option value="en">EN</option></select><button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">☰</button></div>
+  </div>
+</header>
+<main>
+<section class="hero" id="inicio"><div class="wrap hero-grid">
+  <div class="reveal">
+    <span class="eyebrow" data-i18n="heroEyebrow">ESTÚDIO CRIATIVO DIGITAL</span>
+    <h1 data-i18n-html="heroTitle">Ideias que<br><em>ganham forma.</em></h1>
+    <p data-i18n="heroText">Do detalhe de uma comemoração a uma identidade visual cheia de personalidade: criamos peças digitais sob medida para a sua ideia.</p>
+    <div class="actions"><a class="btn btn-primary" href="#servicos" data-i18n="explore">Explorar serviços <span>↘</span></a><a class="btn btn-secondary" href="#" data-whatsapp data-i18n="quote">Pedir orçamento ↗</a></div>
+    <p class="hero-note" data-i18n="heroNote">Cada projeto é combinado individualmente. Sem preços prontos: conte sua ideia e peça um orçamento.</p>
+  </div>
+  <div class="visual reveal" aria-label="Composição abstrata com elementos digitais">
+    <div class="orb"></div><div class="orbit"></div><div class="orbit two"></div><span class="spark s1">✳</span><span class="spark s2">✦</span>
+    <div class="visual-card"><img src="assets/logo-studio-ia.png" alt="Logo do STUDIO IA"><div class="mini"><span data-i18n="visualCaption">ideia em movimento</span><b>STUDIO / 01</b></div></div>
+  </div>
+</div></section>
 
-  <main>
-    <section class="hero" id="inicio">
-      <div class="wrap">
-        <div class="eyebrow"><span class="dot"></span> criatividade com inteligência artificial</div>
-        <div class="hero-grid">
-          <div class="reveal">
-            <h1>ideias grandes.<br><span class="accent">impacto real.</span></h1>
-            <p class="hero-copy">Transformamos ideias em marcas, conteúdo e experiências digitais que chamam atenção. Estratégia humana, criatividade sem fórmula e IA como nossa aliada.</p>
-            <div class="hero-actions">
-              <a class="btn btn-primary" href="#contato">vamos tirar sua ideia do papel <span class="arrow">↗</span></a>
-              <a class="btn btn-secondary" href="#servicos">conheça o studio <span class="arrow">↓</span></a>
-            </div>
-          </div>
-          <div class="hero-art reveal" aria-label="Arte abstrata em forma de esfera verde-limão">
-            <div class="orbit"></div><div class="orbit two"></div><div class="orb"></div>
-            <div class="float-tag tag-one">ideias em movimento <strong>✳</strong></div>
-            <div class="float-tag tag-two"><strong>IA +</strong> criatividade humana</div>
-          </div>
-        </div>
-        <div class="stats reveal">
-          <div class="stat"><strong>01</strong><span>estratégia antes de tudo</span></div>
-          <div class="stat"><strong>∞</strong><span>possibilidades criativas</span></div>
-          <div class="stat"><strong>100%</strong><span>feito para a sua marca</span></div>
-        </div>
-      </div>
-    </section>
+<section class="section section-light" id="servicos"><div class="wrap">
+  <div class="section-head reveal"><div><span class="kicker" data-i18n="servicesKicker">O QUE PODEMOS CRIAR</span><h2 data-i18n-html="servicesTitle">Um mundo de ideias.<br>Do seu jeito.</h2></div><p data-i18n="servicesIntro">Escolha uma categoria para começar. Se a sua ideia for diferente, fale com a gente — projetos personalizados também são bem-vindos.</p></div>
+  <div class="services-grid">
+    <a class="service reveal" href="#" data-order="Mesversários e comemorações"><span class="num">01 / PERSONALIZADOS</span><span class="symbol">✳</span><div><h3 data-i18n="s1title">Mesversários & festas</h3><p data-i18n="s1desc">Artes para celebrar fases, datas e momentos especiais.</p><span class="more" data-i18n="order">Pedir orçamento ↗</span></div></a>
+    <a class="service reveal" href="#" data-order="Montagens e edição de fotos"><span class="num">02 / IMAGEM</span><span class="symbol">◌</span><div><h3 data-i18n="s2title">Montagens & edição</h3><p data-i18n="s2desc">Montagens personalizadas, composição e edição de imagens.</p><span class="more" data-i18n="order">Pedir orçamento ↗</span></div></a>
+    <a class="service reveal" href="#" data-order="Posts e artes digitais"><span class="num">03 / CONTEÚDO</span><span class="symbol">▧</span><div><h3 data-i18n="s3title">Posts & artes digitais</h3><p data-i18n="s3desc">Peças visuais para divulgar ideias, produtos e novidades.</p><span class="more" data-i18n="order">Pedir orçamento ↗</span></div></a>
+    <a class="service reveal" href="#" data-order="Convites personalizados"><span class="num">04 / CELEBRAÇÃO</span><span class="symbol">✉</span><div><h3 data-i18n="s4title">Convites</h3><p data-i18n="s4desc">Convites digitais pensados para combinar com a ocasião.</p><span class="more" data-i18n="order">Pedir orçamento ↗</span></div></a>
+    <a class="service reveal" href="#" data-order="Logos e identidade visual"><span class="num">05 / MARCAS</span><span class="symbol">Aa</span><div><h3 data-i18n="s5title">Logos & marcas</h3><p data-i18n="s5desc">Conceitos visuais e logos personalizados para projetos e negócios.</p><span class="more" data-i18n="order">Pedir orçamento ↗</span></div></a>
+    <a class="service reveal" href="#" data-order="Textos personalizados"><span class="num">06 / PALAVRAS</span><span class="symbol">“ ”</span><div><h3 data-i18n="s6title">Textos & ideias</h3><p data-i18n="s6desc">Textos, frases e ideias criativas para diferentes ocasiões.</p><span class="more" data-i18n="order">Pedir orçamento ↗</span></div></a>
+    <a class="service reveal" href="#" data-order="Ensaios e criações com IA"><span class="num">07 / EXPERIMENTAÇÃO</span><span class="symbol">✧</span><div><h3 data-i18n="s7title">Ensaios & criações com IA</h3><p data-i18n="s7desc">Conceitos visuais e ensaios criativos conforme o pedido.</p><span class="more" data-i18n="order">Pedir orçamento ↗</span></div></a>
+    <a class="service reveal" href="#" data-order="Soluções criativas para empresas"><span class="num">08 / NEGÓCIOS</span><span class="symbol">⌁</span><div><h3 data-i18n="s8title">Para empresas</h3><p data-i18n="s8desc">Artes e materiais visuais sob medida para negócios.</p><span class="more" data-i18n="order">Pedir orçamento ↗</span></div></a>
+  </div>
+</div></section>
 
-    <section id="servicos">
-      <div class="wrap">
-        <div class="section-head reveal">
-          <div><div class="kicker">o que fazemos</div><h2>da primeira ideia<br>à presença digital.</h2></div>
-          <p class="section-desc">Soluções criativas e práticas para marcas que querem se comunicar melhor, ganhar espaço e crescer com intenção.</p>
-        </div>
-        <div class="services">
-          <article class="service reveal">
-            <div class="service-icon">✳</div><h3>Identidade & direção criativa</h3>
-            <p>Conceitos visuais, linguagem de marca e uma direção criativa consistente para sua empresa ser reconhecida.</p>
-            <a class="learn" href="#contato" data-service="Identidade & direção criativa">quero criar minha marca ↗</a>
-          </article>
-          <article class="service reveal">
-            <div class="service-icon">▧</div><h3>Conteúdo & social media</h3>
-            <p>Ideias de conteúdo, campanhas e peças visuais que conversam com seu público e fortalecem sua presença.</p>
-            <a class="learn" href="#contato" data-service="Conteúdo & social media">quero movimentar minhas redes ↗</a>
-          </article>
-          <article class="service reveal">
-            <div class="service-icon">⌘</div><h3>Sites & experiências digitais</h3>
-            <p>Landing pages e experiências digitais responsivas, com foco em clareza, personalidade e conversão.</p>
-            <a class="learn" href="#contato" data-service="Sites & experiências digitais">quero meu site ↗</a>
-          </article>
-        </div>
-      </div>
-    </section>
+<section class="section" id="portfolio"><div class="wrap">
+  <div class="section-head reveal"><div><span class="eyebrow" data-i18n="portfolioKicker">GALERIA CRIATIVA</span><h2 data-i18n-html="portfolioTitle">Possibilidades em<br>forma de imagem.</h2></div><p data-i18n="portfolioIntro">Uma prévia de estilos e direções visuais que podemos explorar. Os cartões abaixo são demonstrações conceituais, não trabalhos de clientes.</p></div>
+  <div class="portfolio-intro"><div class="filters" role="group" aria-label="Filtrar exemplos"><button class="filter active" data-filter="all" data-i18n="filterAll">Tudo</button><button class="filter" data-filter="celebracao" data-i18n="filterParty">Celebrações</button><button class="filter" data-filter="imagem" data-i18n="filterImage">Imagem</button><button class="filter" data-filter="design" data-i18n="filterDesign">Design</button></div></div>
+  <div class="portfolio-grid">
+    <article class="work reveal" data-category="celebracao"><div class="art baby"><div class="label">meu primeiro<br><b>ano</b></div><div class="arch">✿</div></div><div class="work-info"><h3 data-i18n="w1title">Memórias de infância</h3><p data-i18n="demoLabel">Exemplo conceitual • arte comemorativa</p></div></article>
+    <article class="work reveal" data-category="imagem"><div class="art photo"><div class="portrait"></div></div><div class="work-info"><h3 data-i18n="w2title">Retrato editorial</h3><p data-i18n="demoLabel">Exemplo conceitual • direção de imagem</p></div></article>
+    <article class="work reveal" data-category="design"><div class="art post"><div class="post-sheet"><small>IDEIA / 001</small><strong>feito para<br>chamar<br>atenção.</strong><i></i></div></div><div class="work-info"><h3 data-i18n="w3title">Arte para divulgação</h3><p data-i18n="demoLabel">Exemplo conceitual • design digital</p></div></article>
+    <article class="work reveal" data-category="design"><div class="art logoart"><div class="logo-shape">Aa.</div></div><div class="work-info"><h3 data-i18n="w4title">Estudo de identidade</h3><p data-i18n="demoLabel">Exemplo conceitual • estudo tipográfico</p></div></article>
+    <article class="work reveal" data-category="celebracao"><div class="art invite"><div class="invite-card"><span>VOCÊ ESTÁ CONVIDADO</span><strong>vamos<br>celebrar</strong><small>UMA DATA ESPECIAL</small></div></div><div class="work-info"><h3 data-i18n="w5title">Convite especial</h3><p data-i18n="demoLabel">Exemplo conceitual • convite digital</p></div></article>
+    <article class="work reveal" data-category="imagem"><div class="art ensaios"><div class="sphere"></div></div><div class="work-info"><h3 data-i18n="w6title">Estudo de retrato criativo</h3><p data-i18n="demoLabel">Exemplo conceitual • criação visual</p></div></article>
+  </div>
+  <p class="demo-note" data-i18n="demoNote">Importante: estes elementos são estudos visuais demonstrativos criados para apresentar estilos possíveis. Não representam clientes, encomendas ou resultados comerciais reais.</p>
+</div></section>
 
-    <section class="process" id="processo">
-      <div class="wrap">
-        <div class="kicker reveal">simples, colaborativo e estratégico</div>
-        <h2 class="reveal">um bom resultado<br>começa com boas perguntas.</h2>
-        <div class="steps">
-          <article class="step reveal"><div class="step-no">01 / escuta</div><h3>entendemos</h3><p>Conhecemos sua ideia, seu público e o que você quer alcançar.</p></article>
-          <article class="step reveal"><div class="step-no">02 / estratégia</div><h3>planejamos</h3><p>Organizamos prioridades e encontramos a melhor direção para o projeto.</p></article>
-          <article class="step reveal"><div class="step-no">03 / criação</div><h3>construímos</h3><p>Unimos repertório criativo, ferramentas inteligentes e cuidado nos detalhes.</p></article>
-          <article class="step reveal"><div class="step-no">04 / evolução</div><h3>refinamos</h3><p>Apresentamos, ajustamos e entregamos algo alinhado ao seu objetivo.</p></article>
-        </div>
-      </div>
-    </section>
+<section class="section" id="processo" style="background:#211d28"><div class="wrap">
+  <div class="section-head reveal"><div><span class="eyebrow" data-i18n="processKicker">SIMPLES ASSIM</span><h2 data-i18n-html="processTitle">Da ideia à<br>criação final.</h2></div><p data-i18n="processIntro">Cada pedido é conversado individualmente para alinhar expectativas, orçamento e previsão de entrega.</p></div>
+  <div class="process-grid">
+    <div class="step reveal"><span class="stepnum">PASSO 01</span><h3 data-i18n="p1title">Conte sua ideia</h3><p data-i18n="p1desc">Explique o que você quer, envie referências e escolha o tipo de criação.</p></div>
+    <div class="step reveal"><span class="stepnum">PASSO 02</span><h3 data-i18n="p2title">Receba seu orçamento</h3><p data-i18n="p2desc">O valor depende do tipo e dos detalhes do pedido. Tudo é combinado antes de começar.</p></div>
+    <div class="step reveal"><span class="stepnum">PASSO 03</span><h3 data-i18n="p3title">A criação acontece</h3><p data-i18n="p3desc">Seu pedido entra na fila e é desenvolvido por ordem de entrega.</p></div>
+    <div class="step reveal"><span class="stepnum">PASSO 04</span><h3 data-i18n="p4title">Receba sua criação</h3><p data-i18n="p4desc">A previsão é informada no atendimento, considerando a fila e a complexidade.</p></div>
+  </div>
+</div></section>
 
-    <section id="sobre">
-      <div class="wrap manifesto">
-        <div class="manifesto-mark reveal">IA<span style="color:#f5f3ee">.</span></div>
-        <div class="manifesto-copy reveal">
-          <div class="kicker">sobre o studio</div>
-          <h2>tecnologia é ferramenta. boas ideias são o começo.</h2>
-          <p>O STUDIO IA nasce da combinação entre pensamento estratégico, sensibilidade visual e inteligência artificial. Usamos tecnologia para explorar possibilidades, acelerar processos e abrir espaço para o que realmente importa: criar soluções que façam sentido para pessoas e negócios.</p>
-          <div class="manifesto-pills"><span class="pill">feito com intenção</span><span class="pill">curiosidade constante</span><span class="pill">criatividade aplicada</span><span class="pill">tecnologia consciente</span></div>
-        </div>
-      </div>
-    </section>
+<section class="section"><div class="wrap"><div class="custom reveal">
+  <div><span class="kicker" data-i18n="customKicker">NÃO VIU SUA IDEIA AQUI?</span><h2 data-i18n-html="customTitle">A gente pode<br>pensar junto.</h2><p data-i18n="customText">O catálogo é só um ponto de partida. Conte o que você imaginou e vamos conversar sobre as possibilidades.</p><a class="btn" href="#" data-whatsapp data-i18n="customBtn">Tenho uma ideia ↗</a></div>
+  <div class="right" data-i18n="customQuote">Criatividade não precisa caber em uma caixinha.</div>
+</div></div></section>
 
-    <section id="contato">
-      <div class="wrap">
-        <div class="contact-card reveal">
-          <div>
-            <div class="kicker">seu próximo passo começa aqui</div>
-            <h2>tem uma ideia?<br>vamos conversar.</h2>
-            <p>Conta um pouco do que você precisa. A gente transforma essa primeira conversa em possibilidades reais.</p>
-          </div>
-          <form class="contact-form" id="contactForm">
-            <input id="clientName" name="name" type="text" placeholder="seu nome" aria-label="Seu nome" required>
-            <input id="clientEmail" name="email" type="email" placeholder="seu e-mail (opcional)" aria-label="Seu e-mail (opcional)">
-            <select id="projectType" name="project" aria-label="Tipo de projeto" required>
-              <option value="" disabled selected>o que você tem em mente?</option>
-              <option>Identidade & direção criativa</option>
-              <option>Conteúdo & social media</option>
-              <option>Sites & experiências digitais</option>
-              <option>Quero conversar sobre outra ideia</option>
-            </select>
-            <textarea id="projectMessage" name="message" placeholder="conte um pouquinho sobre seu projeto..." aria-label="Conte sobre seu projeto" required></textarea>
-            <button class="btn" type="submit">preparar mensagem ↗</button>
-            <p class="form-note">você vai continuar a conversa pelo WhatsApp. nenhum dado é armazenado neste site.</p>
-          </form>
-        </div>
-      </div>
-    </section>
-  </main>
+<section class="section" id="faq"><div class="wrap faq-grid">
+  <div class="reveal"><span class="eyebrow" data-i18n="faqKicker">ANTES DE PEDIR</span><h2 data-i18n-html="faqTitle">Dúvidas<br>frequentes.</h2><p style="color:#bcb2c5" data-i18n="faqIntro">Não encontrou a resposta? Pode perguntar diretamente pelo WhatsApp.</p><a class="btn btn-secondary" href="#" data-whatsapp data-i18n="askWhats">Falar pelo WhatsApp ↗</a></div>
+  <div class="faq-list reveal">
+    <details><summary data-i18n="q1">Quanto custa um pedido?</summary><p data-i18n="a1">O valor depende do tipo de criação e dos detalhes que você deseja. Chame no WhatsApp para explicar sua ideia e receber um orçamento personalizado, buscando uma opção que caiba no seu bolso.</p></details>
+    <details><summary data-i18n="q2">Quanto tempo demora?</summary><p data-i18n="a2">O prazo depende do tipo de pedido e da fila de produção. Os trabalhos são atendidos por ordem de entrega, e a previsão é combinada durante o atendimento.</p></details>
+    <details><summary data-i18n="q3">Posso pedir algo que não está no catálogo?</summary><p data-i18n="a3">Sim! Envie sua ideia pelo WhatsApp. Vamos conversar sobre o que é possível criar para o seu pedido.</p></details>
+    <details><summary data-i18n="q4">Como faço para encomendar?</summary><p data-i18n="a4">Clique em qualquer botão de orçamento, conte o que deseja e envie referências ou materiais necessários na conversa.</p></details>
+    <details><summary data-i18n="q5">As imagens da galeria são trabalhos de clientes?</summary><p data-i18n="a5">Não. A galeria atual contém exemplos conceituais de demonstração, identificados como tal. Ela não apresenta clientes ou encomendas reais.</p></details>
+  </div>
+</div></section>
 
-  <footer>
-    <div class="wrap footer-inner">
-      <a class="brand" href="#inicio"><span class="brand-mark">✳</span><span>STUDIO IA</span></a>
-      <span>© <span id="year"></span> STUDIO IA. feito para imaginar mais.</span>
-      <div class="footer-links"><a href="#servicos">serviços</a><a href="#sobre">sobre</a><a href="#contato">contato ↗</a></div>
-    </div>
-  </footer>
-
-  <script>
-    const menuToggle = document.getElementById('menuToggle');
-    const navLinks = document.getElementById('navLinks');
-    menuToggle.addEventListener('click', () => {
-      const open = navLinks.classList.toggle('open');
-      menuToggle.setAttribute('aria-expanded', String(open));
-      menuToggle.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
-      menuToggle.textContent = open ? '×' : '☰';
-    });
-    navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
-      navLinks.classList.remove('open');
-      menuToggle.setAttribute('aria-expanded', 'false');
-      menuToggle.setAttribute('aria-label', 'Abrir menu');
-      menuToggle.textContent = '☰';
-    }));
-    document.querySelectorAll('[data-service]').forEach(link => link.addEventListener('click', () => {
-      const select = document.getElementById('projectType');
-      select.value = link.dataset.service;
-    }));
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12 });
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-    document.getElementById('year').textContent = new Date().getFullYear();
-    document.getElementById('contactForm').addEventListener('submit', event => {
-      event.preventDefault();
-      const name = document.getElementById('clientName').value.trim();
-      const email = document.getElementById('clientEmail').value.trim();
-      const project = document.getElementById('projectType').value;
-      const message = document.getElementById('projectMessage').value.trim();
-      // WhatsApp do STUDIO IA informado pelo cliente (Brasil: 55 + DDD + número).
-      const studioWhatsApp = '5574988038460';
-      const body = encodeURIComponent(`Olá, STUDIO IA! Vim pelo site.\n\nMeu nome: ${name}\nMeu e-mail (opcional): ${email}\nProjeto: ${project}\n\nSobre a ideia:\n${message}`);
-      window.open(`https://wa.me/${studioWhatsApp}?text=${body}`, '_blank', 'noopener,noreferrer');
-    });
-  </script>
+<section class="final-cta"><div class="wrap reveal"><span class="eyebrow" data-i18n="finalKicker">VAMOS TIRAR DO PAPEL?</span><h2 data-i18n-html="finalTitle">Sua próxima ideia<br><em style="color:var(--violet)">começa aqui.</em></h2><p data-i18n="finalText">Conte o que você imaginou. A gente conversa sobre possibilidades, orçamento e prazo.</p><a class="btn btn-primary" href="#" data-whatsapp data-i18n="finalBtn">Pedir orçamento no WhatsApp ↗</a></div></section>
+</main>
+<footer class="footer"><div class="wrap footer-inner"><div><strong>STUDIO IA</strong><span> — <span data-i18n="footerLine">ideias que ganham forma.</span></span></div><div data-i18n="footerNote">Atendimento e orçamento pelo WhatsApp.</div><div>© <span id="year"></span> STUDIO IA</div></div></footer>
+<a class="wa-float" href="#" data-whatsapp aria-label="Pedir orçamento pelo WhatsApp"><span>↗</span><span data-i18n="floatWhats">Orçar no WhatsApp</span></a>
+<script>
+const PHONE="74988038460";
+const messages={
+pt:{navServices:"Serviços",navPortfolio:"Galeria",navProcess:"Como funciona",navFaq:"Dúvidas",heroEyebrow:"ESTÚDIO CRIATIVO DIGITAL",heroTitle:'Ideias que<br><em>ganham forma.</em>',heroText:"Do detalhe de uma comemoração a uma identidade visual cheia de personalidade: criamos peças digitais sob medida para a sua ideia.",explore:"Explorar serviços",quote:"Pedir orçamento",heroNote:"Cada projeto é combinado individualmente. Sem preços prontos: conte sua ideia e peça um orçamento.",visualCaption:"ideia em movimento",servicesKicker:"O QUE PODEMOS CRIAR",servicesTitle:"Um mundo de ideias.<br>Do seu jeito.",servicesIntro:"Escolha uma categoria para começar. Se a sua ideia for diferente, fale com a gente — projetos personalizados também são bem-vindos.",s1title:"Mesversários & festas",s1desc:"Artes para celebrar fases, datas e momentos especiais.",s2title:"Montagens & edição",s2desc:"Montagens personalizadas, composição e edição de imagens.",s3title:"Posts & artes digitais",s3desc:"Peças visuais para divulgar ideias, produtos e novidades.",s4title:"Convites",s4desc:"Convites digitais pensados para combinar com a ocasião.",s5title:"Logos & marcas",s5desc:"Conceitos visuais e logos personalizados para projetos e negócios.",s6title:"Textos & ideias",s6desc:"Textos, frases e ideias criativas para diferentes ocasiões.",s7title:"Ensaios & criações com IA",s7desc:"Conceitos visuais e ensaios criativos conforme o pedido.",s8title:"Para empresas",s8desc:"Artes e materiais visuais sob medida para negócios.",order:"Pedir orçamento",portfolioKicker:"GALERIA CRIATIVA",portfolioTitle:"Possibilidades em<br>forma de imagem.",portfolioIntro:"Uma prévia de estilos e direções visuais que podemos explorar. Os cartões abaixo são demonstrações conceituais, não trabalhos de clientes.",filterAll:"Tudo",filterParty:"Celebrações",filterImage:"Imagem",filterDesign:"Design",w1title:"Memórias de infância",w2title:"Retrato editorial",w3title:"Arte para divulgação",w4title:"Estudo de identidade",w5title:"Convite especial",w6title:"Estudo de retrato criativo",demoLabel:"Exemplo conceitual • demonstração visual",demoNote:"Importante: estes elementos são estudos visuais demonstrativos criados para apresentar estilos possíveis. Não representam clientes, encomendas ou resultados comerciais reais.",processKicker:"SIMPLES ASSIM",processTitle:"Da ideia à<br>criação final.",processIntro:"Cada pedido é conversado individualmente para alinhar expectativas, orçamento e previsão de entrega.",p1title:"Conte sua ideia",p1desc:"Explique o que você quer, envie referências e escolha o tipo de criação.",p2title:"Receba seu orçamento",p2desc:"O valor depende do tipo e dos detalhes do pedido. Tudo é combinado antes de começar.",p3title:"A criação acontece",p3desc:"Seu pedido entra na fila e é desenvolvido por ordem de entrega.",p4title:"Receba sua criação",p4desc:"A previsão é informada no atendimento, considerando a fila e a complexidade.",customKicker:"NÃO VIU SUA IDEIA AQUI?",customTitle:"A gente pode<br>pensar junto.",customText:"O catálogo é só um ponto de partida. Conte o que você imaginou e vamos conversar sobre as possibilidades.",customBtn:"Tenho uma ideia",customQuote:"Criatividade não precisa caber em uma caixinha.",faqKicker:"ANTES DE PEDIR",faqTitle:"Dúvidas<br>frequentes.",faqIntro:"Não encontrou a resposta? Pode perguntar diretamente pelo WhatsApp.",askWhats:"Falar pelo WhatsApp",q1:"Quanto custa um pedido?",a1:"O valor depende do tipo de criação e dos detalhes que você deseja. Chame no WhatsApp para explicar sua ideia e receber um orçamento personalizado, buscando uma opção que caiba no seu bolso.",q2:"Quanto tempo demora?",a2:"O prazo depende do tipo de pedido e da fila de produção. Os trabalhos são atendidos por ordem de entrega, e a previsão é combinada durante o atendimento.",q3:"Posso pedir algo que não está no catálogo?",a3:"Sim! Envie sua ideia pelo WhatsApp. Vamos conversar sobre o que é possível criar para o seu pedido.",q4:"Como faço para encomendar?",a4:"Clique em qualquer botão de orçamento, conte o que deseja e envie referências ou materiais necessários na conversa.",q5:"As imagens da galeria são trabalhos de clientes?",a5:"Não. A galeria atual contém exemplos conceituais de demonstração, identificados como tal. Ela não apresenta clientes ou encomendas reais.",finalKicker:"VAMOS TIRAR DO PAPEL?",finalTitle:"Sua próxima ideia<br><em style='color:var(--violet)'>começa aqui.</em>",finalText:"Conte o que você imaginou. A gente conversa sobre possibilidades, orçamento e prazo.",finalBtn:"Pedir orçamento no WhatsApp",footerLine:"ideias que ganham forma.",footerNote:"Atendimento e orçamento pelo WhatsApp.",floatWhats:"Orçar no WhatsApp",whatsMessage:"Olá! Vim pelo site do STUDIO IA e gostaria de pedir um orçamento."},
+en:{navServices:"Services",navPortfolio:"Gallery",navProcess:"How it works",navFaq:"FAQ",heroEyebrow:"DIGITAL CREATIVE STUDIO",heroTitle:'Ideas that<br><em>take shape.</em>',heroText:"From a special celebration to a distinctive visual identity, we create custom digital pieces around your idea.",explore:"Explore services",quote:"Get a quote",heroNote:"Every project is discussed individually. No fixed prices: tell us your idea and ask for a quote.",visualCaption:"ideas in motion",servicesKicker:"WHAT WE CAN CREATE",servicesTitle:"A world of ideas.<br>Your way.",servicesIntro:"Choose a category to get started. Have a different idea? Get in touch — custom requests are welcome.",s1title:"Monthly milestones & parties",s1desc:"Artwork for milestones, dates and special moments.",s2title:"Photo composites & editing",s2desc:"Custom composites, image composition and photo editing.",s3title:"Social posts & digital art",s3desc:"Visual pieces to share ideas, products and news.",s4title:"Invitations",s4desc:"Digital invitations designed for your occasion.",s5title:"Logos & brands",s5desc:"Visual concepts and custom logos for projects and businesses.",s6title:"Words & ideas",s6desc:"Creative writing, phrases and ideas for different occasions.",s7title:"AI portraits & creative imagery",s7desc:"Visual concepts and creative portrait styles based on your request.",s8title:"For businesses",s8desc:"Custom visual artwork and materials for businesses.",order:"Request a quote",portfolioKicker:"CREATIVE GALLERY",portfolioTitle:"Possibilities<br>in visual form.",portfolioIntro:"A preview of styles and visual directions we can explore. The cards below are concept demonstrations, not client work.",filterAll:"All",filterParty:"Celebrations",filterImage:"Image",filterDesign:"Design",w1title:"Childhood memories",w2title:"Editorial portrait",w3title:"Promotional artwork",w4title:"Identity study",w5title:"Special invitation",w6title:"Creative portrait study",demoLabel:"Concept example • visual demonstration",demoNote:"Please note: these are illustrative visual studies created to show possible styles. They do not represent real clients, orders or commercial results.",processKicker:"HERE'S HOW",processTitle:"From an idea<br>to a creation.",processIntro:"Every request is discussed individually to align expectations, quote and estimated delivery.",p1title:"Share your idea",p1desc:"Tell us what you want, share references and choose the type of creation.",p2title:"Get a quote",p2desc:"Pricing depends on the type and details of your request. Everything is agreed before work begins.",p3title:"Creation begins",p3desc:"Your request joins the queue and is handled in delivery order.",p4title:"Receive your creation",p4desc:"An estimate is shared during the conversation, considering the queue and complexity.",customKicker:"DON'T SEE YOUR IDEA HERE?",customTitle:"Let's think<br>it through.",customText:"The catalog is just a starting point. Tell us what you have in mind and let's discuss the possibilities.",customBtn:"I have an idea",customQuote:"Creativity doesn't have to fit in a box.",faqKicker:"BEFORE YOU ORDER",faqTitle:"Frequently<br>asked questions.",faqIntro:"Didn't find your answer? Ask us directly on WhatsApp.",askWhats:"Chat on WhatsApp",q1:"How much does it cost?",a1:"Pricing depends on the type of creation and the details you want. Message us on WhatsApp to explain your idea and receive a personalized quote that considers your budget.",q2:"How long does it take?",a2:"Timing depends on the request and the production queue. Orders are handled in delivery order, and an estimate is agreed during the conversation.",q3:"Can I request something outside the catalog?",a3:"Yes! Send your idea on WhatsApp and we'll discuss what's possible for your request.",q4:"How do I place an order?",a4:"Click any quote button, tell us what you need and share any references or materials in the chat.",q5:"Are the gallery images client projects?",a5:"No. The current gallery contains clearly identified concept demonstrations. It does not show real clients or orders.",finalKicker:"LET'S MAKE IT HAPPEN",finalTitle:"Your next idea<br><em style='color:var(--violet)'>starts here.</em>",finalText:"Tell us what you have in mind. We'll discuss possibilities, pricing and timing.",finalBtn:"Get a quote on WhatsApp",footerLine:"ideas that take shape.",footerNote:"Support and quotes via WhatsApp.",floatWhats:"Get a WhatsApp quote",whatsMessage:"Hello! I found STUDIO IA through the website and would like to request a quote."}
+};
+function setLanguage(lang){document.documentElement.lang=lang==="en"?"en":"pt-BR";document.querySelectorAll("[data-i18n]").forEach(el=>{const key=el.dataset.i18n;if(messages[lang][key])el.textContent=messages[lang][key]});document.querySelectorAll("[data-i18n-html]").forEach(el=>{const key=el.dataset.i18nHtml;if(messages[lang][key])el.innerHTML=messages[lang][key]});document.querySelectorAll("[data-whatsapp]").forEach(el=>{const order=el.dataset.order;const message=order?(lang==="en"?"Hello! I'd like to request a quote for: ":"Olá! Gostaria de pedir um orçamento para: ")+order+".":messages[lang].whatsMessage;el.href="https://wa.me/"+PHONE+"?text="+encodeURIComponent(message);el.target="_blank";el.rel="noopener noreferrer"});document.querySelectorAll(".stepnum").forEach((el,i)=>{el.textContent=(lang==="en"?"STEP ":"PASSO ")+String(i+1).padStart(2,"0")});document.querySelectorAll(".filter").forEach(el=>{if(el.dataset.filter==="all")el.textContent=messages[lang].filterAll;if(el.dataset.filter==="celebracao")el.textContent=messages[lang].filterParty;if(el.dataset.filter==="imagem")el.textContent=messages[lang].filterImage;if(el.dataset.filter==="design")el.textContent=messages[lang].filterDesign})}
+document.getElementById("language").addEventListener("change",e=>setLanguage(e.target.value));
+document.getElementById("menuToggle").addEventListener("click",()=>document.getElementById("navLinks").classList.toggle("open"));
+document.querySelectorAll("#navLinks a").forEach(a=>a.addEventListener("click",()=>document.getElementById("navLinks").classList.remove("open")));
+document.querySelectorAll(".filter").forEach(btn=>btn.addEventListener("click",()=>{document.querySelectorAll(".filter").forEach(b=>b.classList.remove("active"));btn.classList.add("active");document.querySelectorAll(".work").forEach(card=>{card.style.display=btn.dataset.filter==="all"||card.dataset.category===btn.dataset.filter?"":"none"})}));
+const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add("visible");observer.unobserve(entry.target)}}),{threshold:.12});document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
+document.getElementById("year").textContent=new Date().getFullYear();setLanguage("pt");
+</script>
 </body>
 </html>
